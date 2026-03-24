@@ -76,12 +76,14 @@ BRUTAL-002 [HARSH] app.js:214 — Keyboard shortcut 'r' fires reply on inbox vie
   FIX: Guard with `if (!document.querySelector('.email-detail')) return;`
 ```
 
-## MCP Tools
+## Skills
 
-- `brutalize(target, focus)` — Full demolition. Target is a repo path or URL. Focus narrows: "ux", "security", "performance", "all".
-- `roast(file_path)` — Single-file destruction. Every line scrutinized.
-- `compare(target, competitor)` — Feature gap analysis against a known-good product.
-- `shame_board()` — The worst issues across all brutalized projects. Hall of shame.
+| Skill | What It Does |
+|-------|-------------|
+| `/brutalize` | Full demolition of a codebase or deployed app. 5-angle attack, ranked by user pain. |
+| `/roast` | Single-file destruction. Every line scrutinized, every smell called out. |
+| `/compare` | Feature gap analysis — what does the competitor have that you don't? |
+| `/shame-board` | The worst findings across all brutalized projects. Hall of shame. |
 
 ## Guardrails
 
