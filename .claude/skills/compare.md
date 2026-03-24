@@ -1,3 +1,8 @@
+---
+name: compare
+description: Feature gap analysis against a competitor — find every missing capability
+---
+
 # /compare — Feature Gap Analysis
 
 Compare a project against a known-good competitor or standard. Find every feature gap, every UX regression, every missing table-stakes capability.

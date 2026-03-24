@@ -1,3 +1,8 @@
+---
+name: roast
+description: Line-by-line destruction of a single file — every smell called out
+---
+
 # /roast — Single-File Destruction
 
 Line-by-line demolition of a single file. Every smell, every gap, every risk — called out with zero mercy.

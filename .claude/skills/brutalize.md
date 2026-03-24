@@ -1,3 +1,8 @@
+---
+name: brutalize
+description: Full 5-angle codebase demolition — code, UX, reliability, product, ops
+---
+
 # /brutalize — Full Codebase Demolition
 
 Systematically destroy a codebase or deployed app with honest criticism across 5 angles. No compliments. Every finding is actionable, confidence-gated, and ranked by user pain.

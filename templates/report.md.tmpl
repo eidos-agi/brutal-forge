@@ -1,0 +1,53 @@
+## BRUTALIZATION REPORT — {{PROJECT_NAME}}
+
+**{{TOTAL_FINDINGS}} findings. {{BRUTAL_COUNT}} brutal, {{HARSH_COUNT}} harsh, {{BLUNT_COUNT}} blunt, {{SNIDE_COUNT}} snide.**
+
+Generated: {{DATE}}
+Target: {{TARGET}}
+Focus: {{FOCUS}}
+
+---
+
+### BRUTAL (fix today)
+
+{{#BRUTAL_FINDINGS}}
+BRUTAL-{{NUMBER}} [BRUTAL] {{FILE}}:{{LINE}} — {{TITLE}}
+  {{DESCRIPTION}}
+  FIX: {{FIX}}
+
+{{/BRUTAL_FINDINGS}}
+
+### HARSH (fix this week)
+
+{{#HARSH_FINDINGS}}
+BRUTAL-{{NUMBER}} [HARSH] {{FILE}}:{{LINE}} — {{TITLE}}
+  {{DESCRIPTION}}
+  FIX: {{FIX}}
+
+{{/HARSH_FINDINGS}}
+
+### BLUNT (fix when in the area)
+
+{{#BLUNT_FINDINGS}}
+BRUTAL-{{NUMBER}} [BLUNT] {{FILE}}:{{LINE}} — {{TITLE}}
+  {{DESCRIPTION}}
+  FIX: {{FIX}}
+
+{{/BLUNT_FINDINGS}}
+
+### SNIDE (batch with other work)
+
+{{#SNIDE_FINDINGS}}
+BRUTAL-{{NUMBER}} [SNIDE] {{FILE}}:{{LINE}} — {{TITLE}}
+  {{DESCRIPTION}}
+  FIX: {{FIX}}
+
+{{/SNIDE_FINDINGS}}
+
+---
+
+### Suspicious (LOW confidence — verify before acting)
+
+{{#SUSPICIOUS_FINDINGS}}
+- {{FILE}}:{{LINE}} — {{TITLE}}: {{DESCRIPTION}}
+{{/SUSPICIOUS_FINDINGS}}

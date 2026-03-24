@@ -1,3 +1,8 @@
+---
+name: shame-board
+description: Worst findings across all brutalized projects — the hall of shame
+---
+
 # /shame-board — Hall of Shame
 
 Surface the worst findings across all brutalized projects. The issues that keep coming back, the patterns that never get fixed, the sins that every project commits.

@@ -1,0 +1,181 @@
+name: Users-dshanklinbv-repos-eidos-agi-brutal-forge
+target: /Users/dshanklinbv/repos-eidos-agi/brutal-forge
+target_type: repo
+created_at: '2026-03-24T15:22:24Z'
+steps:
+- name: skills directory exists with skill files
+  type: cli
+  config:
+    command: ls -la /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.claude/skills/
+    expect_exit_code: 0
+    expect_output_contains: .md
+  why: Forge Standard requires .claude/skills/ with actual skill files
+- name: skill files have valid frontmatter
+  type: cli
+  config:
+    command: head -5 /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.claude/skills/*.md
+      2>/dev/null | head -40
+    expect_exit_code: 0
+    expect_output_contains: '---'
+  why: Skill files need YAML frontmatter to be picked up by Claude Code
+- name: templates directory exists with template files
+  type: cli
+  config:
+    command: ls -la /Users/dshanklinbv/repos-eidos-agi/brutal-forge/templates/
+    expect_exit_code: 0
+  why: Forge Standard requires templates/ directory
+- name: visionlog initialized
+  type: cli
+  config:
+    command: ls -la /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.visionlog/
+    expect_exit_code: 0
+  why: Forge Standard requires visionlog to be initialized
+- name: visionlog has vision.md
+  type: cli
+  config:
+    command: cat /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.visionlog/vision.md
+      2>/dev/null || echo 'MISSING'
+    expect_exit_code: 0
+    expect_output_contains: vision
+  why: Visionlog should have a vision statement defined
+- name: no pyproject.toml (forge not software)
+  type: cli
+  config:
+    command: test ! -f /Users/dshanklinbv/repos-eidos-agi/brutal-forge/pyproject.toml
+      && echo 'PASS_NO_PYPROJECT' || echo 'FAIL_HAS_PYPROJECT'
+    expect_exit_code: 0
+    expect_output_contains: PASS_NO_PYPROJECT
+  why: "Forge Standard: no software artifacts \u2014 forges are knowledge, not packages"
+- name: no setup.py or package.json (forge not software)
+  type: cli
+  config:
+    command: test ! -f /Users/dshanklinbv/repos-eidos-agi/brutal-forge/setup.py &&
+      test ! -f /Users/dshanklinbv/repos-eidos-agi/brutal-forge/package.json && echo
+      'PASS_NO_PKG' || echo 'FAIL_HAS_PKG'
+    expect_exit_code: 0
+    expect_output_contains: PASS_NO_PKG
+  why: "Forge Standard: no CLI, no package \u2014 forges are pure knowledge"
+- name: LICENSE file exists and has content
+  type: cli
+  config:
+    command: wc -l /Users/dshanklinbv/repos-eidos-agi/brutal-forge/LICENSE
+    expect_exit_code: 0
+  why: Forge Standard requires LICENSE file
+- name: gitignore exists
+  type: cli
+  config:
+    command: cat /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.gitignore
+    expect_exit_code: 0
+  why: Forge Standard requires .gitignore
+- name: git working tree is clean
+  type: cli
+  config:
+    command: cd /Users/dshanklinbv/repos-eidos-agi/brutal-forge && git status --porcelain
+    expect_exit_code: 0
+    expect_output_contains: ''
+  why: "Forge Standard requires git clean \u2014 no uncommitted changes"
+- name: pushed to GitHub remote
+  type: cli
+  config:
+    command: cd /Users/dshanklinbv/repos-eidos-agi/brutal-forge && git remote -v
+    expect_exit_code: 0
+    expect_output_contains: github.com
+  why: Forge Standard requires repo pushed to GitHub
+- name: local branch matches remote (no unpushed commits)
+  type: cli
+  config:
+    command: cd /Users/dshanklinbv/repos-eidos-agi/brutal-forge && git log origin/main..HEAD
+      --oneline 2>/dev/null | wc -l | tr -d ' '
+    expect_exit_code: 0
+    expect_output_contains: '0'
+  why: "Forge must be fully pushed \u2014 no local-only commits"
+- name: skills match README advertised skills
+  type: cli
+  config:
+    command: ls /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.claude/skills/ 2>/dev/null
+    expect_exit_code: 0
+    expect_output_contains: brutal
+  why: "README advertises brutalize, roast, compare, shame-board \u2014 verify skill\
+    \ files exist for them"
+- name: no Dockerfile (forge not deployable)
+  type: cli
+  config:
+    command: test ! -f /Users/dshanklinbv/repos-eidos-agi/brutal-forge/Dockerfile
+      && echo 'PASS_NO_DOCKER' || echo 'FAIL_HAS_DOCKER'
+    expect_exit_code: 0
+    expect_output_contains: PASS_NO_DOCKER
+  why: Forges are knowledge repos, not deployable services
+- name: registered in forge-forge registry
+  type: cli
+  config:
+    command: grep -r 'brutal-forge' /Users/dshanklinbv/repos-eidos-agi/forge-forge/
+      2>/dev/null || echo 'NOT_FOUND_IN_REGISTRY'
+    expect_exit_code: 0
+  why: Forge Standard requires registration in the forge-forge registry
+- name: skill files frontmatter re-check (read actual content)
+  type: cli
+  config:
+    command: head -5 /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.claude/skills/*.md
+      2>/dev/null || echo 'NO_SKILL_FILES'
+    expect_exit_code: 0
+    expect_output_contains: '---'
+  why: Previous frontmatter check failed. Need to see actual file contents to determine
+    if files lack frontmatter or if the test pattern was wrong.
+- name: skill files are markdown not other formats
+  type: cli
+  config:
+    command: ls -la /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.claude/skills/
+    expect_exit_code: 0
+    expect_output_contains: .md
+  why: Verify skill files are .md format as expected by Claude Code skill loading.
+- name: CLAUDE.md references skills directory correctly
+  type: cli
+  config:
+    command: grep -c 'skill\|brutal\|roast\|compare\|shame' /Users/dshanklinbv/repos-eidos-agi/brutal-forge/CLAUDE.md
+    expect_exit_code: 0
+    expect_output_contains: ''
+  why: CLAUDE.md should describe the skills this forge provides so Claude Code knows
+    how to use them.
+- name: templates are non-empty markdown files
+  type: cli
+  config:
+    command: wc -l /Users/dshanklinbv/repos-eidos-agi/brutal-forge/templates/*.md
+      2>/dev/null || echo 'NO_TEMPLATES'
+    expect_exit_code: 0
+    expect_output_contains: total
+  why: Templates should have substantial content, not be empty placeholder files.
+- name: visionlog has guardrails defined
+  type: cli
+  config:
+    command: ls /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.visionlog/guardrails/
+      2>/dev/null && cat /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.visionlog/guardrails/*.md
+      2>/dev/null | head -20 || echo 'NO_GUARDRAILS'
+    expect_exit_code: 0
+    expect_output_contains: ''
+  why: Forge standard expects visionlog to be initialized with guardrails, not just
+    vision.md.
+- name: no Python or Node runtime files leaked in
+  type: cli
+  config:
+    command: ls /Users/dshanklinbv/repos-eidos-agi/brutal-forge/*.py /Users/dshanklinbv/repos-eidos-agi/brutal-forge/*.js
+      /Users/dshanklinbv/repos-eidos-agi/brutal-forge/*.ts 2>&1 | grep -v 'No such
+      file' || echo 'CLEAN'
+    expect_exit_code: 0
+    expect_output_contains: CLEAN
+  why: Forges are knowledge packages, not software. No runtime code should exist at
+    root level.
+- name: gitignore has sensible entries for a forge
+  type: cli
+  config:
+    command: cat /Users/dshanklinbv/repos-eidos-agi/brutal-forge/.gitignore
+    expect_exit_code: 0
+    expect_output_contains: .DS_Store
+  why: Gitignore should at minimum exclude OS artifacts. Verify it has reasonable
+    forge-appropriate entries.
+- name: LICENSE is a recognized open source license
+  type: cli
+  config:
+    command: head -3 /Users/dshanklinbv/repos-eidos-agi/brutal-forge/LICENSE
+    expect_exit_code: 0
+    expect_output_contains: ''
+  why: LICENSE should contain a real license text, not just a placeholder.
