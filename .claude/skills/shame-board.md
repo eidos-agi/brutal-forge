@@ -15,7 +15,15 @@ User says `/shame-board` or asks to see the worst findings.
 
 ### Step 1: Find All Reports
 
-Look for `.brutal-forge/last-report.md` files across all repos in `~/repos-eidos-agi/` and `~/repos-aic/`. Also check `~/.local/share/brutal-forge/reports/`.
+Search for `.brutal-forge/last-report.md` files across all repos:
+```bash
+find ~/repos-eidos-agi ~/repos-aic -name "last-report.md" -path "*/.brutal-forge/*" 2>/dev/null
+```
+
+Also check for `history.jsonl` files for trend data:
+```bash
+find ~/repos-eidos-agi ~/repos-aic -name "history.jsonl" -path "*/.brutal-forge/*" 2>/dev/null
+```
 
 ### Step 2: Extract BRUTAL Findings
 

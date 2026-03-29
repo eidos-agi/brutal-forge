@@ -1,0 +1,31 @@
+{
+  "date": "2026-03-29",
+  "project": "brutal-forge",
+  "scores": {
+    "reliability": 6,
+    "performance": null,
+    "ux": 8,
+    "security": null,
+    "code_quality": 7,
+    "documentation": 9,
+    "packaging": 8,
+    "vision_alignment": 9,
+    "production_readiness": 7
+  },
+  "overall": 54,
+  "applicable_dimensions": 7,
+  "focus": "production_readiness",
+  "improvement": "Made brutalize always save reports (not optional). Added history.jsonl append for trend tracking. Updated shame-board to use find instead of hardcoded paths. Connected the pipeline between skills so shame-board actually works.",
+  "files_changed": [
+    ".claude/skills/brutalize.md",
+    ".claude/skills/shame-board.md"
+  ],
+  "delta": {
+    "production_readiness": {
+      "before": 5,
+      "after": 7
+    }
+  },
+  "next_priority": "reliability — /compare skill relies entirely on agent world knowledge for competitor features. Could use a structured competitor template or web search integration.",
+  "agent": "improve-forge"
+}

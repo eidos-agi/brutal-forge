@@ -67,12 +67,22 @@ BRUTAL-001 [BRUTAL] file.py:42 — <title>
 
 Sort within each section by user pain (worst first). Number findings sequentially across all sections (BRUTAL-001 through BRUTAL-N).
 
-### Step 5: Offer Next Steps
+### Step 5: Save the Report
 
-After presenting the report, offer:
+Always save the report. This is not optional — `/shame-board` and future improvement tracking depend on it.
+
+1. Create `.brutal-forge/` directory in the target project if it doesn't exist
+2. Write the report to `.brutal-forge/last-report.md` (overwrite previous)
+3. Append a summary line to `.brutal-forge/history.jsonl`:
+   ```json
+   {"date": "2026-03-29", "findings": 12, "brutal": 3, "harsh": 5, "blunt": 3, "snide": 1}
+   ```
+
+### Step 6: Offer Next Steps
+
+After saving, offer:
 1. "Create ike tasks for BRUTAL + HARSH findings?" — converts top findings to executable tasks
 2. "Fix the BRUTAL issues now?" — start coding fixes immediately
-3. "Save report to .brutal-forge/last-report.md?" — persist for the next robot
 
 ## Rules
 
